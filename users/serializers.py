@@ -8,8 +8,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = get_user_model()
-    fields = ['first_name', 'last_name', 'username', 'email', 'email_verified', 'encrypt_pswds', 'password', 'conf_password']
-    read_only_fields = ['email_verified']
+    fields = ['first_name', 'last_name', 'email', 'password', 'conf_password']
   
   def create(self, validated_data):
     if validated_data['password'] == validated_data['conf_password']:
@@ -29,5 +28,5 @@ class LoginSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = get_user_model()
-    fields = ('email', 'username', 'password', 'token')
+    fields = ('email', 'password', 'token')
     read_only_fields = ['token']

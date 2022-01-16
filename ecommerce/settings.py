@@ -11,7 +11,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '103.205.180.155']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -26,8 +26,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
-    'users.apps.UsersConfig',
-    'credentials.apps.CredentialsConfig',
+    'core',
+    'users',
+    'products',
+    'django_cleanup.apps.CleanupConfig'
 ]
 
 REST_FRAMEWORK = {
@@ -59,7 +61,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 
-ROOT_URLCONF = 'cms.urls'
+ROOT_URLCONF = 'ecommerce.urls'
 
 TEMPLATES = [
     {
@@ -77,32 +79,32 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'cms.wsgi.application'
+WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_POST'),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+#         'PORT': config('DB_POST'),
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#         }
+#     }
+# }
 
 
 
@@ -124,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'users.CustomUsers'
+AUTH_USER_MODEL = 'users.CustomUser'
 
 
 # Internationalization
@@ -150,3 +152,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+USER_ONLINE_TIMEOUT = 10
+
+PRODUCT_CODE_PREFIX = 'NEED'

@@ -4,13 +4,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
 from users.serializers import RegisterSerializer, LoginSerializer
-from .models import CustomUsers
+from .models import CustomUser
 
 
 
 class RegisterView(GenericAPIView):
   serializer_class = RegisterSerializer
-  queryset = CustomUsers.objects.all()
+  queryset = CustomUser.objects.all()
   authentication_classes = []
 
   def post(self, request):
