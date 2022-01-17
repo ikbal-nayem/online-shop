@@ -57,7 +57,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 def user_media_path(instance, filename):
-  return "users/{0}/{1}".format(instance.user.user_id, filename)
+  ext = filename.split('.')[-1]
+  return "users/profile/{0}_{1}.{2}".format(instance.user.get_full_name.replace(' ', '_'), instance.user.user_id, ext)
 
 
 class Profile(TimeStampedModel):

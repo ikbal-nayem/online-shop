@@ -13,20 +13,20 @@ class ColorAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-  list_display = ('category', 'title', 'product_code', 'variant', 'price', 'stock', 'status')
+  list_display = ('title', 'category', 'product_code', 'variant', 'price', 'stock', 'is_active')
   list_display_links = ('title', 'product_code', 'variant')
-  list_editable = ('status',)
+  list_editable = ('is_active', 'price', 'stock')
   search_fields = ('title', 'category', 'variant')
-  list_filter = ('status', 'category')
+  list_filter = ('is_active', 'category')
 
 
 @admin.register(ProductVariants)
 class ProductVariantsAdmin(admin.ModelAdmin):
-  list_display = ('product', 'color', 'size', 'sku', 'price', 'stock', 'status')
+  list_display = ('product', 'color', 'size', 'sku', 'price', 'stock', 'is_active')
   list_display_links = ('product', 'sku')
-  list_editable = ('status',)
+  list_editable = ('is_active', 'price', 'stock')
   search_fields = ('product', 'sku')
-  list_filter = ('status', 'product__category')
+  list_filter = ('is_active', 'product__category')
 
 
 @admin.register(ProductImage)
@@ -41,9 +41,10 @@ class ProductImageAdmin(admin.ModelAdmin):
 class CategoryAdmin(DraggableMPTTAdmin):
   mptt_indent_field = "name"
   list_display = ('tree_actions', 'indented_title',
-                  'related_products_count', 'related_products_cumulative_count')
+                  'related_products_count', 'related_products_cumulative_count', 'is_active')
   list_display_links = ('indented_title',)
-  prepopulated_fields = {'slug': ('slug',)}
+  list_editable = ('is_active',)
+  # prepopulated_fields = {'slug': ('name',)}
   def get_queryset(self, request):
     qs = super().get_queryset(request)
     # Add cumulative product count
