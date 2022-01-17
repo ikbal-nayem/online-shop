@@ -3,25 +3,19 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
-from users.serializers import RegisterSerializer, LoginSerializer
-from .models import CustomUser
+from users.serializers import RegisterSerializer, LoginSerializer, UserSerializer
 
 
 
 class RegisterView(GenericAPIView):
   serializer_class = RegisterSerializer
-  queryset = CustomUser.objects.all()
   authentication_classes = []
 
   def post(self, request):
-    if not request.data.get('username', None) and request.data.get('email', None):
-      request.data['username'] = request.data['email'].split('@')[0]
-    serializer = RegisterSerializer(data=request.data)
+    serializer = self.serializer_class(data=request.data)
     if serializer.is_valid():
       serializer.save()
-      data = serializer.data
-      data['success'] = True
-      return Response(data, status=status.HTTP_201_CREATED)
+      return Response({'success': True, 'data': serializer.data}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -37,28 +31,26 @@ class LoginView(GenericAPIView):
     user = authenticate(username=email, password=password)
     if user:
       instance = self.serializer_class(user)
-      data = instance.data
-      data['success'] = True
-      return Response(data, status=status.HTTP_200_OK)
+      return Response({'success': True, 'data': instance.data}, status=status.HTTP_200_OK)
     return Response({'message': 'Invalid credentials, try again!'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 
 class UserAPIView(GenericAPIView):
+  serializer_class = UserSerializer
+
   def get(self, request):
     user = request.user
-    serializer = RegisterSerializer(user)
-    return Response({'user': serializer.data, 'success': True})
+    serializer = self.serializer_class(user)
+    return Response({'data': serializer.data, 'success': True})
 
   def patch(self, request):
     user = request.user
     new_data = request.data
-    serializer = RegisterSerializer(user, data=new_data, partial=True)
+    serializer = self.serializer_class(user, data=new_data, partial=True)
     if serializer.is_valid():
       serializer.save()
-      data = serializer.data
-      data['success'] = True
-      return Response(data, status=status.HTTP_200_OK)
+      return Response({'success': True, 'data': serializer.data}, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
   
 

@@ -8,4 +8,5 @@ from django.urls.conf import include
 urlpatterns = [
     path('super-admin/', admin.site.urls),
     path('api/user/', include('users.urls')),
+    path('api/', include('products.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

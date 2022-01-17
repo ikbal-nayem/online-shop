@@ -44,21 +44,21 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
   objects = CustomUserManager()
 
   @property
-  def get_full_name(self):
+  def full_name(self):
     return '{0} {1}'.format(self.first_name, self.last_name)
 
   @property
   def token(self):
-    return jwt.encode({'user_id': self.user_id, 'exp': datetime.utcnow()+timedelta(hours=12)}, settings.SECRET_KEY, algorithm='HS256')
+    return jwt.encode({'user_id': self.id, 'exp': datetime.utcnow()+timedelta(hours=12)}, settings.SECRET_KEY, algorithm='HS256')
 
   def __str__(self) -> str:
-    return self.get_full_name
+    return self.full_name
 
 
 
 def user_media_path(instance, filename):
   ext = filename.split('.')[-1]
-  return "users/profile/{0}_{1}.{2}".format(instance.user.get_full_name.replace(' ', '_'), instance.user.user_id, ext)
+  return "users/profile/{0}_{1}.{2}".format(instance.user.full_name.replace(' ', '_'), instance.user.user_id, ext)
 
 
 class Profile(TimeStampedModel):
@@ -88,7 +88,7 @@ class Profile(TimeStampedModel):
       return False
 
   def __str__(self) -> str:
-    return self.user.get_full_name
+    return self.user.full_name
 
 
 
@@ -112,4 +112,4 @@ class Address(TimeStampedModel):
   address_tag = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
 
   def __str__(self) -> str:
-    return self.user.get_full_name
+    return self.user.full_name

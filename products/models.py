@@ -42,8 +42,8 @@ class Category(MPTTModel, TimeStampedModel):
   def get_absolute_url(self):
     return reverse('category_detail', kwargs={'slug': self.slug})
 
-  def __str__(self):                           # __str__ method elaborated later in
-    full_path = [self.name]                  # post.  use __unicode__ in place of
+  def __str__(self):
+    full_path = [self.name]
     k = self.parent
     while k is not None:
       full_path.append(k.name)
