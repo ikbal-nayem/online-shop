@@ -33,6 +33,9 @@ class Category(MPTTModel, TimeStampedModel):
   slug = AutoSlugField(populate_from='name', unique=True)
   is_active = models.BooleanField(default=True)
 
+  class Meta:
+    ordering = ['name']
+
   def __str__(self):
     return self.name
   
@@ -121,8 +124,8 @@ class ProductVariants(models.Model):
 
 
 class ProductImage(models.Model):
-  product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_images', null=True, blank=True)
-  variant = models.ForeignKey(ProductVariants, on_delete=models.CASCADE, related_name='variant_images', null=True, blank=True)
+  product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', null=True, blank=True)
+  variant = models.ForeignKey(ProductVariants, on_delete=models.CASCADE, related_name='images', null=True, blank=True)
   image = models.ImageField(upload_to=product_image_path, blank=True)
 
   def __str__(self) -> str:
