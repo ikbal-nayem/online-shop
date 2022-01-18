@@ -5,19 +5,19 @@ import logo from '../assets/images/Logo-2.png'
 
 const mainNav = [
     {
-        display: "Trang chủ",
+        display: "Home",
         path: "/"
     },
     {
-        display: "Sản phẩm",
+        display: "Product",
         path: "/catalog"
     },
     {
-        display: "Phụ kiện",
+        display: "Accessory",
         path: "/accessories"
     },
     {
-        display: "Liên hệ",
+        display: "Contact Us",
         path: "/contact"
     }
 ]
@@ -38,7 +38,7 @@ const Header = () => {
             }
         })
         return () => {
-            window.removeEventListener("scroll")
+            window.removeEventListener("scroll", ()=>{})
         };
     }, []);
 

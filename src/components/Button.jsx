@@ -9,9 +9,11 @@ const Button = props => {
 
     const animate = props.animate ? 'btn-animate' : ''
 
+    const full = props.full ? 'btn__full' : ''
+
     return (
         <button
-            className={`btn ${bg} ${size} ${animate}`}
+            className={`btn ${full} ${bg} ${size} ${animate}`}
             onClick={props.onClick ? () => props.onClick() : null}
         >
             <span className="btn__txt">{props.children}</span>

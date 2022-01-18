@@ -140,7 +140,7 @@ const ProductView = props => {
                 </div>
                 <div className="product__info__item">
                     <div className="product__info__item__title">
-                        Màu sắc
+                        Size
                     </div>
                     <div className="product__info__item__list">
                         {

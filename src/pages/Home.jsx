@@ -16,7 +16,7 @@ import banner from '../assets/images/banner.png'
 
 const Home = () => {
     return (
-        <Helmet title="Trang chủ">
+        <Helmet title="Online Shop">
             {/* hero slider */}
             <HeroSlider
                 data={heroSliderData}
@@ -29,12 +29,7 @@ const Home = () => {
             {/* policy section */}
             <Section>
                 <SectionBody>
-                    <Grid
-                        col={4}
-                        mdCol={2}
-                        smCol={1}
-                        gap={20}
-                    >
+                    <Grid col={4} mdCol={2} smCol={2} gap={15}>
                         {
                             policy.map((item, index) => <Link key={index} to="/policy">
                                 <PolicyCard
@@ -52,17 +47,12 @@ const Home = () => {
             {/* best selling section */}
             <Section>
                 <SectionTitle>
-                    top sản phẩm bán chạy trong tuần
+                    Top Products
                 </SectionTitle>
                 <SectionBody>
-                    <Grid
-                        col={4}
-                        mdCol={2}
-                        smCol={1}
-                        gap={20}
-                    >
+                    <Grid col={6} mdCol={4} smCol={2} gap={15}>
                         {
-                            productData.getProducts(4).map((item, index) => (
+                            productData.getProducts(6).map((item, index) => (
                                 <ProductCard
                                     key={index}
                                     img01={item.image01}
@@ -80,18 +70,11 @@ const Home = () => {
 
             {/* new arrival section */}
             <Section>
-                <SectionTitle>
-                    sản phẩm mới
-                </SectionTitle>
+                <SectionTitle>New Products</SectionTitle>
                 <SectionBody>
-                    <Grid
-                        col={4}
-                        mdCol={2}
-                        smCol={1}
-                        gap={20}
-                    >
+                    <Grid col={5} mdCol={4} smCol={2} gap={20} >
                         {
-                            productData.getProducts(8).map((item, index) => (
+                            productData.getProducts(10).map((item, index) => (
                                 <ProductCard
                                     key={index}
                                     img01={item.image01}
@@ -119,16 +102,9 @@ const Home = () => {
 
             {/* popular product section */}
             <Section>
-                <SectionTitle>
-                    phổ biến
-                </SectionTitle>
+                <SectionTitle>Popular Products</SectionTitle>
                 <SectionBody>
-                    <Grid
-                        col={4}
-                        mdCol={2}
-                        smCol={1}
-                        gap={20}
-                    >
+                    <Grid col={6} mdCol={4} smCol={2} gap={15}>
                         {
                             productData.getProducts(12).map((item, index) => (
                                 <ProductCard

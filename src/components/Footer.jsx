@@ -8,38 +8,30 @@ import logo from '../assets/images/Logo-2.png'
 
 const footerAboutLinks = [
     {
-        display: "Giới thiệu",
+        display: "Contact",
         path: "/about"
     },
     {
-        display: "Liên hệ",
+        display: "News",
         path: "/about"
     },
     {
-        display: "Tuyển dụng",
-        path: "/about"
-    },
-    {
-        display: "Tin tức",
-        path: "/about"
-    },
-    {
-        display: "Hệ thống cửa hàng",
+        display: "Privacy Policy",
         path: "/about"
     }
 ]
 
 const footerCustomerLinks = [
     {
-        display: "Chính sách đổi trả",
+        display: "Terms & Conditions",
         path: "/about"
     },
     {
-        display: "Chính sách bảo hành",
+        display: "Help Center",
         path: "/about"
     },
     {
-        display: "Chính sách hoàn tiền",
+        display: "Returns & Refunds",
         path: "/about"
     }
 ]
@@ -55,23 +47,23 @@ const Footer = () => {
                 >
                     <div>
                         <div className="footer__title">
-                            Tổng đài hỗ trợ
+                            Support
                         </div>
                         <div className="footer__content">
                             <p>
-                                Liên hệ đặt hàng <strong>0123456789</strong>
+                                Contact to order <strong>0123456789</strong>
                             </p>
                             <p>
-                                Thắc mắc đơn hàng <strong>0123456789</strong>
+                                Order inquiries <strong>0123456789</strong>
                             </p>
                             <p>
-                                Góp ý, khiếu nại <strong>0123456789</strong>
+                                Report <strong>0123456789</strong>
                             </p>
                         </div>
                     </div>
                     <div>
                         <div className="footer__title">
-                            Về Yolo
+                            About NEED
                         </div>
                         <div className="footer__content">
                             {
@@ -87,7 +79,7 @@ const Footer = () => {
                     </div>
                     <div>
                         <div className="footer__title">
-                            Chăm sóc khách hàng
+                            Customer Care
                         </div>
                         <div className="footer__content">
                             {
@@ -108,7 +100,8 @@ const Footer = () => {
                             </Link>
                         </p>
                         <p>
-                            Hướng đến mục tiêu mang lại niềm vui ăn mặc mới mỗi ngày cho hàng triệu người tiêu dùng Việt. Hãy cùng Yolo hướng đến một cuộc sống năng động, tích cực hơn.
+                            Towards the goal of bringing a new joy of dressing every day to millions of Vietnamese consumers.
+                            Let's join NEED towards a more active and positive life.
                         </p>
                     </div>
                 </Grid>

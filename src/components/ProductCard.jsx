@@ -12,7 +12,6 @@ import Button from './Button'
 import numberWithCommas from '../utils/numberWithCommas'
 
 const ProductCard = props => {
-
     const dispatch = useDispatch()
 
     return (
@@ -32,12 +31,13 @@ const ProductCard = props => {
             </Link>
             <div className="product-card__btn">
                 <Button
-                    size="sm"    
+                    size="sm"
+                    full={true}
                     icon="bx bx-cart"
                     animate={true}
                     onClick={() => dispatch(set(props.slug))}
                 >
-                    chọn mua
+                    Collect
                 </Button>
             </div>
         </div>
