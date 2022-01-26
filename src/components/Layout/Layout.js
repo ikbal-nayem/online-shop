@@ -10,6 +10,7 @@ import asyncComponent from '../../util/asyncComponent';
 
 
 import Configuration from "../../pages/configuration";
+import ProductConfig from "../../pages/product-config";
 
 const Dashboard = asyncComponent(() => import('pages/dashboard'))
 const ResetPass = asyncComponent(() => import('pages/ChangePassword'))
@@ -26,6 +27,7 @@ const AppRoutes = React.memo(()=>{
     <Routes>
       <Route path="/dashboard" element={<Dashboard/>} />
       <Route path="/configuration/*" element={<Configuration/>}/>
+      <Route path="/product-config/*" element={<ProductConfig/>}/>
       <Route path="/reset-password" element={<ResetPass/>}/>
       <Route path="*" element={<NotFound/>} />
     </Routes>

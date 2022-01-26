@@ -84,7 +84,7 @@ const fakeLogin = ()=>{
 
 const fakeUserInfo = ()=>{
   return new Promise((resolve, reject)=>{
-    resolve({"success":true,"role":"vssQFOBH2Oi1cnNULlE/ShttO3SIE1rSnQzKet++FTU=","name":"HOTEL ADMIN","user_id":"2880bd69-abe4-4f4c-85f1-cf75aab8fabb","client":{"id":1,"name":"NICE BEACH RESORT","code":"01","description":"NICE BEACH RESORT","phone":"548825417","address":"SULAYMAN ROAD, BAGICHAGAON(NEAR FIRE BRIGADE POND)","division":"CHITTAGONG","district":"CUMILLA","thana":"COMILLA SADAR DAKSHIN","email":"admin@email.com","zipcode":"3500","logo":"/images/client/01/logo/05.png"},"client_code":"01","project":[{"id":3,"name":"Security","code":"0103","in_charge":"Imrul Kayes","phone":"0167858424","isActive":true}],"phone":"01724589637","hk_id":null})
+    resolve({"success":true,"role":"vssQFOBH2Oi1cnNULlE/ShttO3SIE1rSnQzKet++FTU=","name":"Ikbal Nayem","user_id":"2880bd69-abe4-4f4c-85f1-cf75aab8fabb","client":{"id":1,"name":"Shop Admin","code":"01","description":"Online Shop admin","phone":"548825417","address":"SULAYMAN ROAD, BAGICHAGAON(NEAR FIRE BRIGADE POND)","division":"CHITTAGONG","district":"CUMILLA","thana":"COMILLA SADAR DAKSHIN","email":"admin@email.com","zipcode":"3500","logo":"/images/client/01/logo/05.png"},"client_code":"01","project":[{"id":3,"name":"Security","code":"0103","in_charge":"Imrul Kayes","phone":"0167858424","isActive":true}],"phone":"01724589637","hk_id":null})
   })
 }
 

@@ -1,3 +1,7 @@
+@import url('./bootstrap.css');
+@import url('./animation/animation.min.css');
+
+
 input, button {
   outline: none !important;
 }
@@ -24,6 +28,12 @@ input[type=number]::-webkit-outer-spin-button {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.MuiDataGrid-columnHeaders{
+  color: var(--primary);
+}
+.MuiDataGrid-columnHeaderTitle{
+  font-weight: bold !important;
+}
 
 ._disabled-block{
   pointer-events: none;
@@ -39,64 +49,6 @@ input[type=number]::-webkit-outer-spin-button {
 .app-wrapper{
   margin-top: 40px;
 }
-.ka-thead-cell{
-  padding-top: 5px !important;
-  padding-bottom: 5px !important;
-}
-.ka-paging {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.ka-paging-pages {
-  margin: 0px;
-  padding: 0px;
-  display: flex;
-  justify-content: center;
-}
-.ka-paging-page-index{
-  margin: 0 2px;
-  border: 1px solid var(--primary);
-  border-radius: 5px;
-  font-weight: bold;
-  padding: 5px 10px;
-  transition: .5s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.ka-paging-page-index-active {
-  background-color: var(--primary);
-  color: #fff;
-  transform: scaleY(1.1);
-  transform-origin: bottom;
-  transition: .5s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.ka-paging-page-index:hover{
-  transform: scaleY(1.1);
-  transform-origin: bottom;
-  background-color: var(--primary-lite);
-}
-.ka-input{
-  border-radius: 10px;
-  border-color: #bdbdbd;
-}
-.ka-row{
-  border-width: 1px;
-  border-color: #bdbdbd;
-}
-.ka-thead-cell-content {
-  color: var(--primary);
-}
-.ka-cell{
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-.room-card{
-  border: 1px solid #ddd9d9;
-  border-top-width: 3px;
-  box-shadow: none;
-  width: 100px;
-}
-
-
-
 /* hover component */
 .hover__container .hover__component{
   opacity: 0;

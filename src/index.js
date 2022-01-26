@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import {BrowserRouter} from 'react-router-dom'
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from '@mui/material/CssBaseline';
-
 import Themes from "./themes";
-import "./styles/bootstrap.css";
+
+import 'smart-webcomponents-react/source/styles/smart.default.css';
 import "./styles/_global.css";
-import "./styles/animation/animation.min.css";
+
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { LayoutProvider } from "./context/LayoutContext";
