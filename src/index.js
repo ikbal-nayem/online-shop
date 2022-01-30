@@ -5,7 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from '@mui/material/CssBaseline';
 import Themes from "./themes";
 
-import 'smart-webcomponents-react/source/styles/smart.default.css';
+import "ka-table/style.css";
 import "./styles/_global.css";
 
 import App from "./components/App";

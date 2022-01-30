@@ -1,82 +1,118 @@
 import React from 'react';
 import PageWrapper from 'components/common/PageWrapper';
-import {
-  DataGrid,
-  gridPageCountSelector,
-  gridPageSelector,
-  useGridApiContext,
-  useGridSelector
-} from '@mui/x-data-grid';
-import Pagination from '@mui/material/Pagination';
+import { kaReducer, Table } from 'ka-table';
+import { updateData, updateEditorValue } from 'ka-table/actionCreators';
+import { DataType, FilteringMode, PagingPosition, SortingMode } from 'ka-table/enums';
 import ColorForm from 'components/forms/product-configuration/color-form';
-
+import { EditButton, SaveButton } from 'components/table-components/ka-table';
 
 
 
 const rows = [
-  { id: 1, col1: 'Hello', col2: 'World' },
-  { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-  { id: 3, col1: 'MUI', col2: 'is Amazing' },
-  { id: 4, col1: 'gaer', col2: 'is Amazing' },
-  { id: 5, col1: 'sdrf', col2: 'is Amazing' },
-  { id: 6, col1: 'ssg', col2: 'is Amazing' },
-  { id: 7, col1: 'sf', col2: 'is Amazing' },
-  { id: 8, col1: 'MUI', col2: 'is Amazing' },
-  { id: 9, col1: 'xv', col2: 'is Amazing' },
-  { id: 10, col1: 'gg', col2: 'is Amazing' }
-];
-
-const columns = [
-  { field: 'col1', headerName: 'Color Name', width: 180, editable: true },
-  { field: 'col2', headerName: 'Color', width: 200, editable: true },
+  { id: 1, name: 'Back', code: '#000000' },
+  { id: 2, name: 'Blue', code: '#0044aa' },
+  { id: 3, name: 'Red', code: '#ff0000' },
 ];
 
 
-const style = {
-  '& .MuiDataGrid-row--editing .MuiDataGrid-cell': {
-    background: 'var(--primary-lite)'
+const ColorInput = ({ column, dispatch, rowKeyValue, value}) => (
+  <input type="color" defaultValue={value} onChange={(e) => dispatch(updateEditorValue(rowKeyValue, column.key, e.target.value))} />
+)
+
+
+const tablePropsInit = {
+  columns: [
+    { key: 'name', title: 'Name', dataType: DataType.String, isResizable: true },
+    { key: 'code', title: 'Color Code', dataType: DataType.String, style: { textAlign: 'center' } },
+    { key: 'editColumn', style: { width: 80 } },
+  ],
+  format: ({ column, value }) => {
+    if (column.dataType === DataType.Date) {
+      return value && value.toLocaleDateString('en', { month: '2-digit', day: '2-digit', year: 'numeric' });
+    }
+  },
+  data: [],
+  rowKeyField: 'id',
+  sortingMode: SortingMode.Single,
+  filteringMode: FilteringMode.FilterRow,
+  paging: {
+    enabled: true,
+    pageSize: 10,
+    position: PagingPosition.Bottom
+  },
+  validation: ({ column, value }) => {
+    if (column.key === 'name') {
+      return value ? '' : 'value must be specified';
+    }
   }
-}
+};
 
-
-
-function CustomPagination() {
-  const apiRef = useGridApiContext();
-  const page = useGridSelector(apiRef, gridPageSelector);
-  const pageCount = useGridSelector(apiRef, gridPageCountSelector);
-
-  return (
-    <Pagination
-      color="primary"
-      className="d-flex justify-content-center anign-items-center mb-3"
-      count={pageCount}
-      page={page + 1}
-      variant='outlined'
-      onChange={(event, value) => apiRef.current.setPage(value - 1)}
-    />
-  );
-}
 
 function Color() {
+  const [tableProps, changeTableProps] = React.useState(tablePropsInit);
+
+  const dispatch = (action) => {
+    changeTableProps((prevState) => kaReducer(prevState, action));
+  };
+
+
+  const handleData = React.useCallback((action, data)=>{
+    if(action === 'ADD'){
+      dispatch(updateData([data, ...tableProps.data]))
+    } else if(action === 'DELETE'){
+      dispatch(updateData(tableProps.data.filter((row) => row.id !== data)))
+    }
+  }, [tableProps])
+
+  React.useEffect(()=>{
+    dispatch(updateData([...rows]))
+  },[])
+
+
   return (
     <PageWrapper page_title="Color Setup">
       <div className="form-row">
         <div className="col-md-4">
           <div className="card p-2">
-            <ColorForm/>
+            <ColorForm handleData={handleData}/>
           </div>
         </div>
         <div className='col'>
-          <div className='card' style={{ height: '80vh' }}>
-            <DataGrid
-              autoPageSize
-              rows={rows}
-              columns={columns}
-              editMode="row"
-              density="compact"
-              sx={style}
-              components={{
-                Footer: CustomPagination
+          <div className='card' style={{ maxHeight: '80vh' }}>
+            <Table
+              {...tableProps}
+              dispatch={dispatch}
+              childComponents={{
+                filterRowCell: {
+                  content: (props) => {
+                    switch (props.column.key) {
+                      case 'name': return;
+                      default: return <React.Fragment/>
+                    }
+                  }
+                },
+                cellText: {
+                  content: (props) => {
+                    if (props.column.key === 'editColumn'){
+                      return <EditButton {...props} />
+                    } else if(props.column.key === 'code'){
+                      return  <div className='text-center' style={{ background: props.value }}>
+                                <span className='bg-light p-1' style={{borderRadius: 15}}>
+                                  {props.value}
+                                </span>
+                              </div>
+                    }
+                  }
+                },
+                cellEditor: {
+                  content: (props) => {
+                    if (props.column.key === 'editColumn') {
+                      return <SaveButton {...props} />
+                    } else if (props.column.key === 'code'){
+                      return <ColorInput {...props} />
+                    }
+                  }
+                }
               }}
             />
           </div>
